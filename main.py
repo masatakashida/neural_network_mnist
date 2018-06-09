@@ -59,12 +59,16 @@ training_data_file = open("mnist_dataset/mnist_train.csv", 'r')
 training_data_list = training_data_file.readlines()
 training_data_file.close()
 
-for record in training_data_list:
-    all_values = record.split(',')
-    inputs = (numpy.asfarray(all_values[1:] ) / 255.0 * 0.99) + 0.01
-    targets = numpy.zeros(output_nodes) + 0.0
-    targets[int(all_values[0])] = 0.99
-    n.train(inputs, targets)
+epochs = 2
+
+for e in range(epochs):
+    for record in training_data_list:
+        all_values = record.split(',')
+        inputs = (numpy.asfarray(all_values[1:] ) / 255.0 * 0.99) + 0.01
+        targets = numpy.zeros(output_nodes) + 0.01
+        targets[int(all_values[0])] = 0.99
+        n.train(inputs, targets)
+        pass
     pass
 
 #test_data_file = open("mnist_dataset/mnist_test_10.csv", 'r')
